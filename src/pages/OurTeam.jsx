@@ -49,8 +49,8 @@ import { Infinity as InfinityIcon, Sparkles } from 'lucide-react'
 
 export default function OurTeam() {
   const members = [
-    { name: 'siya roniya', role: 'the talking tom, Comics Queen' },
-    { name: 'Bhavya Goyal', role: 'Tech Genius guy' },
+    { name: 'Siya Kumari', role: 'The talking tom, Comics Queen' },
+    { name: 'Bhavya Goyal', role: 'Genius' },
     { name: 'Ratan', role: 'The Arduino Rockstar' },
     { name: 'Nandani', role: 'The supergirl, chota Packet Bada Dhamaka' },
     { name: 'Madhav Bhati', role: 'The Architect' },
