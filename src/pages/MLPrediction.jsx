@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from 'recharts'
 
-export default function MLPrediction() {
+export default function TimelineGeneration() {
   const data = useMemo(() => Array.from({ length: 20 }, (_, i) => ({
     t: `T${i}`,
     actual: Math.round(400 + Math.sin((i / 10) * Math.PI) * 120 + Math.random() * 50),
@@ -12,7 +12,7 @@ export default function MLPrediction() {
 
   const forecast = useMemo(() => Array.from({ length: 24 }, (_, i) => ({
     hour: `${i}h`,
-    value: Math.round(300 + Math.sin((i / 24) * Math.PI) * 120 + Math.random() * 40),
+    activities: Math.round(300 + Math.sin((i / 24) * Math.PI) * 120 + Math.random() * 40),
   })), [])
 
   // Simulated solar elevation angle (°) over 24h for visualization
@@ -22,12 +22,12 @@ export default function MLPrediction() {
   })), [])
 
   const features = [
-    { name: 'Solar Irradiance', importance: 0.32 },
-    { name: 'Pump Runtime', importance: 0.22 },
-    { name: 'Water Table', importance: 0.17 },
-    { name: 'Ambient Temp', importance: 0.12 },
-    { name: 'Array Efficiency', importance: 0.09 },
-    { name: 'Grid Voltage', importance: 0.08 },
+    { name: 'Location Data', importance: 0.32 },
+    { name: 'Time Patterns', importance: 0.22 },
+    { name: 'Access Logs', importance: 0.17 },
+    { name: 'Device Usage', importance: 0.12 },
+    { name: 'Social Patterns', importance: 0.09 },
+    { name: 'Historical Data', importance: 0.08 },
   ]
 
   const matrix = useMemo(() => Array.from({ length: 8 }, (_, r) => (
@@ -48,22 +48,22 @@ export default function MLPrediction() {
   return (
     <div className="space-y-8">
       <div className="rounded-xl bg-white dark:bg-mining-card p-4 border border-white/10">
-        <div className="text-lg font-semibold">How SolarSiphon predicts water savings</div>
+        <div className="text-lg font-semibold">How Campus Data Integration generates activity timelines</div>
         <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-          We combine real-time operations with weather and pump telemetry to forecast dewatered volume and savings.
+          We combine multiple data sources to reconstruct complete activity timelines and predict future behaviors using explainable AI.
         </div>
         <div className="mt-3 grid grid-cols-1 md:grid-cols-5 gap-2 text-xs">
-          <div className="px-3 py-2 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan text-center">Ingest: Sensors + Weather</div>
-          <div className="px-3 py-2 rounded-full bg-white/40 dark:bg-white/5 border border-white/20 text-center">Clean & Validate</div>
-          <div className="px-3 py-2 rounded-full bg-neon-violet/10 border border-neon-violet/30 text-neon-violet text-center">Engineer Features</div>
+          <div className="px-3 py-2 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan text-center">Ingest: Multi-Source Data</div>
+          <div className="px-3 py-2 rounded-full bg-white/40 dark:bg-white/5 border border-white/20 text-center">Entity Resolution</div>
+          <div className="px-3 py-2 rounded-full bg-neon-violet/10 border border-neon-violet/30 text-neon-violet text-center">Timeline Reconstruction</div>
           <div className="px-3 py-2 rounded-full bg-amber-100/40 dark:bg-amber-400/10 border border-amber-300/40 text-amber-600 dark:text-amber-200 text-center">Predict (ML)</div>
-          <div className="px-3 py-2 rounded-full bg-white/40 dark:bg-white/5 border border-white/20 text-center">Compare vs Actuals</div>
+          <div className="px-3 py-2 rounded-full bg-white/40 dark:bg-white/5 border border-white/20 text-center">Generate Insights</div>
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="rounded-xl bg-white dark:bg-mining-card p-4 shadow-soft border border-gray-100 dark:border-white/5">
-          <div className="text-sm text-gray-500">Predicted Water Volume Saved</div>
-          <div className="mt-1 text-3xl font-semibold">{saved.toLocaleString()} m³</div>
+          <div className="text-sm text-gray-500">Predicted Activity Events</div>
+          <div className="mt-1 text-3xl font-semibold">{saved.toLocaleString()}</div>
           <div className="text-xs text-gray-500">Based on last cycle</div>
         </div>
         <div className="rounded-xl bg-white dark:bg-mining-card p-4 shadow-soft border border-gray-100 dark:border-white/5">
@@ -73,13 +73,13 @@ export default function MLPrediction() {
         </div>
         <div className="rounded-xl bg-white dark:bg-mining-card p-4 shadow-soft border border-gray-100 dark:border-white/5">
           <div className="text-sm text-gray-500">Next 24h Forecast Avg</div>
-          <div className="mt-1 text-3xl font-semibold">{Math.round(forecast.reduce((a,b)=>a+b.value,0)/forecast.length)} m³</div>
+          <div className="mt-1 text-3xl font-semibold">{Math.round(forecast.reduce((a,b)=>a+b.activities,0)/forecast.length)} events</div>
           <div className="text-xs text-gray-500">Auto-updating hourly</div>
         </div>
       </div>
 
       <div className="rounded-xl bg-white dark:bg-mining-card p-4 shadow-soft border border-gray-100 dark:border-white/5">
-        <div className="font-medium mb-2">Predicted vs Actual Dewatered Water</div>
+        <div className="font-medium mb-2">Predicted vs Actual Activity Events</div>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data}>
@@ -125,7 +125,7 @@ export default function MLPrediction() {
           </div>
         </div>
         <div className="rounded-xl bg-white dark:bg-mining-card p-4 shadow-soft border border-gray-100 dark:border-white/5">
-          <div className="font-medium mb-2">Next 24h Forecast</div>
+          <div className="font-medium mb-2">Next 24h Activity Forecast</div>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={forecast}>
@@ -133,7 +133,7 @@ export default function MLPrediction() {
                 <YAxis stroke="currentColor" opacity={0.6} />
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
                 <Tooltip />
-                <Line dataKey="value" stroke="#22d3ee" strokeWidth={2} dot={false} />
+                <Line dataKey="activities" stroke="#22d3ee" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -142,8 +142,8 @@ export default function MLPrediction() {
       </div>
 
       <div className="rounded-xl bg-white dark:bg-mining-card p-4 shadow-soft border border-gray-100 dark:border-white/5">
-        <div className="font-medium mb-1">Solar Elevation Angle (°)</div>
-        <div className="text-xs text-gray-500 mb-2">Higher angle generally increases irradiance and improves solar-driven dewatering efficiency.</div>
+        <div className="font-medium mb-1">Activity Pattern Analysis</div>
+        <div className="text-xs text-gray-500 mb-2">Higher activity levels generally indicate normal campus behavior patterns and help identify anomalies.</div>
         <div className="h-56">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={solarAngle}>
@@ -151,7 +151,7 @@ export default function MLPrediction() {
               <YAxis stroke="currentColor" opacity={0.6} domain={[0, 90]} />
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
               <Tooltip />
-              <Line name="Angle" dataKey="angle" stroke="#f59e0b" strokeWidth={2} dot={false} />
+              <Line name="Activity Level" dataKey="angle" stroke="#f59e0b" strokeWidth={2} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -186,7 +186,7 @@ export default function MLPrediction() {
         </div>
         <div className="rounded-xl bg-white dark:bg-mining-card p-4 shadow-soft border border-gray-100 dark:border-white/5">
           <div className="font-medium mb-1">In plain English</div>
-          <div className="text-sm text-gray-600 dark:text-gray-300">We look at sunlight, pump usage, and water levels. The model learns how these affect dewatering. It then predicts the next 24 hours, with a confidence band to show uncertainty. More sunlight and efficient pumps usually mean higher water moved and more savings.</div>
+          <div className="text-sm text-gray-600 dark:text-gray-300">We analyze location data, access patterns, and device usage to reconstruct complete activity timelines. The model learns behavioral patterns and predicts future activities with confidence intervals. This helps identify anomalies and missing entities across campus data sources.</div>
         </div>
       </div>
     </div>

@@ -5,6 +5,9 @@
 /* App base styles */
 html, body, #root {
   height: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Smooth scroll and selection */
@@ -15,4 +18,14 @@ html {
 ::selection {
   background: #f5ad42;
   color: #111827;
+}
+
+/* Prevent horizontal overflow */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

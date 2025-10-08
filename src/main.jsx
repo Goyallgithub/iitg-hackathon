@@ -10,7 +10,6 @@ import MLPrediction from './pages/MLPrediction.jsx'
 import Reports from './pages/Reports.jsx'
 import SystemHealth from './pages/SystemHealth.jsx'
 import Optimizer from './pages/Optimizer.jsx'
-import OurTeam from './pages/OurTeam.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,7 +22,6 @@ const router = createBrowserRouter([
       { path: '/reports', element: <Reports /> },
       { path: '/health', element: <SystemHealth /> },
       { path: '/optimizer', element: <Optimizer /> },
-      { path: '/team', element: <OurTeam /> },
     ],
   },
 ])
